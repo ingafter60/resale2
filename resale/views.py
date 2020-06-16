@@ -8,10 +8,16 @@ def home(request):
 	context = {'section': 'home', 'categories': categories}
 	return render(request, 'Resale/index.html', context)
 
+# def category(request):
+# 	categories = Category.objects.all()	
+# 	context = {'section': 'home', 'categories': categories}
+# 	return render(request, 'Resale/categories.html' )
 
-def category_list(request, slug=None):
-	cat_list = get_object_or_404(Category, slug=slug)	
-	context = {'catlist':cat_list}
+
+def category(request, slug=None):
+	# posts = get_object_or_404(Category, slug=slug)	
+	categories =  Category.objects.all()	
+	context = {'categories':categories}
 	return render(request, 'Resale/categories.html', context)
 
 

@@ -26,28 +26,7 @@ class Category(models.Model):
 		return self.cat_name	
 
 	def get_absolute_url(self):
-		return reverse('resale:category_list', args=[str(self.slug)])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		return reverse('resale:category', args=[str(self.slug)])
 
 
 
@@ -59,51 +38,51 @@ class Product(models.Model):
 		("Used", "Used")
 	)
 
-	pro_name 		= models.CharField(max_length=100)
-	pro_owner 		= models.ForeignKey(User, on_delete=models.CASCADE)
-	pro_description = models.TextField(max_length=500)
-	pro_condition 	= models.CharField(max_length=100, choices=CONDITION_TYPE)
+	name 		= models.CharField(max_length=100)
+	owner 		= models.ForeignKey(User, on_delete=models.CASCADE)
+	description = models.TextField(max_length=500)
+	condition 	= models.CharField(max_length=100, choices=CONDITION_TYPE)
 	category_product= models.ForeignKey('Category', on_delete=models.SET_NULL, null=True)
-	pro_brand 		= models.ForeignKey('Brand' , on_delete=models.SET_NULL, null=True)
-	pro_price 		= models.DecimalField(max_digits=10, decimal_places=2)
-	pro_image 		= models.ImageField(upload_to='main_product/', blank=True, null=True)
-	pro_created 	= models.DateTimeField(default=timezone.now)
-	pro_slug 		= models.SlugField(blank=True, null=True)
+	brand 		= models.ForeignKey('Brand' , on_delete=models.SET_NULL, null=True)
+	price 		= models.DecimalField(max_digits=10, decimal_places=2)
+	image 		= models.ImageField(upload_to='main_product/', blank=True, null=True)
+	created 	= models.DateTimeField(default=timezone.now)
+	slug 		= models.SlugField(blank=True, null=True)
 
 	def save(self, *args, **kwargs):
-		if not self.pro_slug and self.pro_name:
-			self.pro_slug = slugify(self.pro_name)
+		if not self.slug and self.name:
+			self.slug = slugify(self.name)
 		super(Product, self).save(*args, **kwargs)	
 
 	def __str__(self):
-		return self.pro_name
+		return self.name
 
 
 
 # BRAND MODEL/TALBE
 class Brand(models.Model):
 
-    brand_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = 'brand'
         verbose_name_plural = 'brands'
 
     def __str__(self):
-        return self.brand_name	
+        return self.name	
 
 
 # PRODUCTIMAGES MODEL/TALBE
 class ProductImages(models.Model):
-    product_productimages	= models.ForeignKey(Product , on_delete=models.CASCADE)
-    proimg_image			= models.ImageField(upload_to='products/', blank=True , null=True)
+    images	= models.ForeignKey(Product , on_delete=models.CASCADE)
+    image			= models.ImageField(upload_to='products/', blank=True , null=True)
 
     class Meta:
         verbose_name = 'Product Image'
         verbose_name_plural = 'Product Images'        
 
     def __str__(self):
-        return self.product_productimages.pro_name
+        return self.images.name
 
 
 
