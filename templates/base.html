@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>Home | Resale</title>
+</head>
+<body>
+
+<ul class="menu">
+    <li><a href="{% url 'home' %}">Home</a></li>
+</ul>
+
+{% block title %}{% endblock %}
+
+<p>{% block content %}Some default content{% endblock %}</p>
+
+</body>
+</html>
