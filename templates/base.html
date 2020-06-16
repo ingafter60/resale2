@@ -1,13 +1,19 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 	<title>Home | Resale</title>
 </head>
 <body>
 
+
 <ul class="menu">
-    <li><a href="{% url 'home' %}">Home</a></li>
+    <li>
+        <a class="{% if section == 'home' %}active{% endif %}"
+           href="{% url 'home' %}">Home</a>
+    </li>
 </ul>
 
 {% block title %}{% endblock %}

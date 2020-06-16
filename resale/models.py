@@ -1,5 +1,6 @@
 # resale/models.py
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
@@ -9,12 +10,13 @@ from django.utils.text import slugify
 class Category(models.Model):
 	
 	cat_name 	= models.CharField(max_length=50)
+	cat_description = models.CharField(max_length=255)
 	cat_image 	= models.ImageField(upload_to='category/', blank=True, null=True)
-	cat_slug 	= models.SlugField(blank=True, null=True)
+	slug 	= models.SlugField(blank=True, null=True)
 
 	def save(self, *args, **kwargs):
-		if not self.cat_slug and self.cat_name:
-			self.cat_slug = slugify(self.cat_name)
+		if not self.slug and self.cat_name:
+			self.slug = slugify(self.cat_name)
 		super(Category, self).save(*args, **kwargs)	
 
 	class Meta:
@@ -25,6 +27,8 @@ class Category(models.Model):
 		return self.cat_name	
 
 
+	def get_absolute_url(self):
+		return reverse('resale:category_list', args=[str(self.slug)])
 
 # PRODUCT MODEL/TALBE
 class Product(models.Model):

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+<!-- It will extend from base.html (line: 21) -->
+{% block title %}
+	<h2>{{ category }}</h2>
+	<p>{{ category.cat_description }}</p>
+{% endblock %}
+
+{% block content %}
+
+    <p><a href="{% url 'home' %}">&larr; Back</a></p>
+
+{% endblock %}

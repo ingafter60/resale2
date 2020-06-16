@@ -8,6 +8,7 @@ import resale.views
 
 urlpatterns = [
     path('', resale.views.home, name='home'),
+    path('category/', include('resale.urls')),
     path('admin/', admin.site.urls),
 ] 
 # Serving static files during development
