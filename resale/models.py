@@ -10,7 +10,7 @@ class Category(models.Model):
 	
 	cat_name = models.CharField(max_length=50)
 	cat_description = models.CharField(max_length=255)
-	cat_image= models.ImageField(upload_to='category/', blank=True, null=True)
+	image = models.ImageField(upload_to='category/', blank=True, null=True)
 	slug 	 = models.SlugField(blank=True, null=True)
 
 	def save(self, *args, **kwargs):
