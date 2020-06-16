@@ -8,14 +8,12 @@ def home(request):
 	context = {'section': 'home', 'categories': categories}
 	return render(request, 'Resale/index.html', context)
 
-# def detail(request, slug=None):
-# 	category = get_object_or_404(Category, slug=slug)	
-# 	context = {'category':category}
-# 	return render(request, 'Resale/categories.html', context)
-
 
 def category_list(request, slug=None):
 	cat_list = get_object_or_404(Category, slug=slug)	
 	context = {'catlist':cat_list}
 	return render(request, 'Resale/categories.html', context)
+
+
+
 

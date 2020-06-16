@@ -5,14 +5,13 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 
-
 # CATEGORY MODEL/TALBE
 class Category(models.Model):
 	
-	cat_name 	= models.CharField(max_length=50)
+	cat_name = models.CharField(max_length=50)
 	cat_description = models.CharField(max_length=255)
-	cat_image 	= models.ImageField(upload_to='category/', blank=True, null=True)
-	slug 	= models.SlugField(blank=True, null=True)
+	cat_image= models.ImageField(upload_to='category/', blank=True, null=True)
+	slug 	 = models.SlugField(blank=True, null=True)
 
 	def save(self, *args, **kwargs):
 		if not self.slug and self.cat_name:
@@ -26,9 +25,31 @@ class Category(models.Model):
 	def __str__(self):
 		return self.cat_name	
 
-
 	def get_absolute_url(self):
 		return reverse('resale:category_list', args=[str(self.slug)])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # PRODUCT MODEL/TALBE
 class Product(models.Model):
